@@ -1,0 +1,1 @@
+python -m grpc_tools.protoc -I grpc --python_out=../backend/ --grpc_python_out=../backend/ grpc/butter.proto

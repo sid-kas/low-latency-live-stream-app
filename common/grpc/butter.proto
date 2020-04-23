@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package ButterStream;
+
+
+message SessionInfo {
+    string clientId = 1;
+    uint64 timestamp = 2; 
+}
+
+message ConnectArg {
+    SessionInfo sessionInfo = 1;
+}
+
+message DisconnectArg {
+    SessionInfo sessionInfo = 1;
+}
+
+message StartStreamArg {
+    SessionInfo sessionInfo = 1;
+
+}
+
+message StopStreamArg {
+    SessionInfo sessionInfo = 1;
+}
+
+message ReturnStatus {
+    bool error = 1; 
+    string info = 2;
+}
+
+message DataContainer {
+    bytes img = 1;
+}
+
+service VideoStream { 
+    rpc connect (ConnectArg) returns (ReturnStatus);
+    rpc startStream (StartStreamArg) returns (stream DataContainer);
+    rpc stopStream (StopStreamArg) returns (ReturnStatus);
+    rpc disconnect (DisconnectArg) returns (ReturnStatus);
+}
